@@ -1,8 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import logo from '../assets/PNG-1.png'
+
 const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
   const [scrolled, setScrolled] = useState(false);
+  const [logoAnimationComplete, setLogoAnimationComplete] = useState(false);
 
   // Handle scroll effect for navbar
   useEffect(() => {
@@ -24,16 +26,30 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.2 }}
         className={`fixed top-0 left-0 right-0 z-50 ${
           scrolled ? 'bg-white shadow-md' : 'bg-white/95'
         } transition-all duration-300`}
       >
         <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo with spin animation */}
           <div className="flex items-center">
-            <img src={logo} alt="Connektixx" className="h-8" />
-            <span className="ml-2 text-2xl font-bold text-gray-800">Connektixx</span>
+            <motion.div
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1.0, ease: "easeOut" }}
+              onAnimationComplete={() => setLogoAnimationComplete(true)}
+            >
+              <img src={logo} alt="Connektixx" className="h-8" />
+            </motion.div>
+            <motion.span 
+              initial={{ x: -20, opacity: 0 }}
+              animate={logoAnimationComplete ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              className="ml-2 text-2xl font-bold text-gray-800"
+            >
+              Connektixx
+            </motion.span>
           </div>
 
           {/* Desktop Menu */}
@@ -86,10 +102,24 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
             className="fixed inset-0 z-50 bg-white md:hidden"
           >
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-              {/* Logo in Mobile Menu */}
+              {/* Logo in Mobile Menu with spin animation */}
               <div className="flex items-center">
-                <img src={logo} alt="Connektixx" className="h-8" />
-                <span className="ml-2 text-2xl font-bold text-gray-800">Connektixx</span>
+                <motion.div
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  onAnimationComplete={() => setLogoAnimationComplete(true)}
+                >
+                  <img src={logo} alt="Connektixx" className="h-8" />
+                </motion.div>
+                <motion.span 
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={logoAnimationComplete ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="ml-2 text-2xl font-bold text-gray-800"
+                >
+                  Connektixx
+                </motion.span>
               </div>
 
               {/* Close Button */}

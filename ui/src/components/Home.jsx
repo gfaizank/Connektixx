@@ -1,6 +1,11 @@
+// Updated Home component that uses the context
 import { motion } from "framer-motion";
+import { useActiveSection } from "../context/ActiveSectionContext";
 
 const Home = () => {
+  // Get active section data from context
+  const { activeSection } = useActiveSection();
+
   // Animation variants
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -15,7 +20,7 @@ const Home = () => {
     <div className="relative bg-gradient-to-br from-purple-50 to-white min-h-screen pt-24 pb-16">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="pt-24 md:pt-32 lg:pt-36 pb-12">
-          {/* Main headline - Changed to center alignment */}
+          {/* Main headline - Center alignment */}
           <motion.div
             initial="hidden"
             animate="visible"
@@ -63,13 +68,13 @@ const Home = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-gray-900 text-white px-8 py-4 rounded font-medium text-lg"
               >
-                Let’s Connect
+                Let's Connect
               </motion.button>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Certification Section - Changed to center alignment */}
+        {/* Certification Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -80,7 +85,7 @@ const Home = () => {
             Our Performance Marketing Services are Certified by
           </p>
           <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-            {/* Replace with actual partner logos */}
+            {/* Partner logos */}
             <div className="w-32 h-12 bg-gray-100 flex items-center justify-center rounded">
               <span className="text-gray-500">Meta Partner</span>
             </div>
@@ -93,20 +98,14 @@ const Home = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Dot Navigation (visible on larger screens) */}
-      <div className="hidden lg:block fixed right-8 top-1/2 transform -translate-y-1/2 z-40">
-        <div className="flex flex-col space-y-4">
-          {[0, 1, 2, 3, 4].map((dot) => (
-            <div
-              key={dot}
-              className={`w-3 h-3 rounded-full ${
-                dot === 0 ? "bg-purple-600" : "bg-gray-300"
-              } cursor-pointer`}
-            />
-          ))}
+      
+      {/* Debug Panel - Remove in production */}
+      {/* {process.env.NODE_ENV !== 'production' && (
+        <div className="fixed bottom-4 left-4 bg-white p-4 shadow-lg rounded-lg z-50 text-sm opacity-75 hover:opacity-100 transition-opacity">
+          <h3 className="font-bold mb-2">Debug Info:</h3>
+          <p>Active Section Index: {activeSection}</p>
         </div>
-      </div>
+      )} */}
     </div>
   );
 };
