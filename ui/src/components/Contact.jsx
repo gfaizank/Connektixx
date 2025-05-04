@@ -125,7 +125,7 @@ const Contact = () => {
                 Contact Information
               </h3>
               <div className="space-y-6 mb-auto">
-                <div className="flex items-start">
+              <a href="tel:+919220559644" className="flex items-start hover:text-purple-400 transition-colors">
                   <div className="text-purple-400 mr-4">
                     <svg
                       className="w-6 h-6"
@@ -146,9 +146,9 @@ const Contact = () => {
                     <h4 className="font-medium text-purple-300">Phone</h4>
                     <p className="text-gray-300">[+91 9220559644]</p>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-start">
+                <a href="mailto:pragya.shukla@connektixx.com" className="flex items-start hover:text-purple-400 transition-colors">
                   <div className="text-purple-400 mr-4">
                     <svg
                       className="w-6 h-6"
@@ -169,7 +169,7 @@ const Contact = () => {
                     <h4 className="font-medium text-purple-300">Email</h4>
                     <p className="text-gray-300">[pragya.shukla@connektixx.com]</p>
                   </div>
-                </div>
+                </a>
 
                 <div className="flex items-start">
                   <div className="text-purple-400 mr-4">

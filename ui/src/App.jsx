@@ -57,7 +57,7 @@ function App() {
                 setMenuOpen={setMenuOpen}
               />
             </div>
-            <Home />
+            <Home scrollToSection={scrollToSection} contactRef={contactRef} />
           </section>
 
           <section ref={servicesRef} id="services">

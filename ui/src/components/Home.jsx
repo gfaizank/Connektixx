@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useActiveSection } from "../context/ActiveSectionContext";
 
-const Home = () => {
+const Home = ({ scrollToSection, contactRef }) => {
   // Get active section data from context
   const { activeSection } = useActiveSection();
 
@@ -67,6 +67,7 @@ const Home = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-gray-900 text-white px-8 py-4 rounded font-medium text-lg"
+                onClick={() => scrollToSection(contactRef)}
               >
                 Let's Connect
               </motion.button>
