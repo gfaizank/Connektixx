@@ -1,6 +1,82 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const Contact = () => {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
+  
+  const [status, setStatus] = useState({
+    submitting: false,
+    submitted: false,
+    success: false,
+    message: ""
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ submitting: true, submitted: false, success: false, message: "" });
+
+    try {
+      const response = await fetch('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      const data = await response.json();
+      
+      if (data.status === 'success') {
+        setStatus({
+          submitting: false,
+          submitted: true,
+          success: true,
+          message: data.message
+        });
+        
+        // Reset form after successful submission
+        setFormData({
+          name: "",
+          company: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+      } else {
+        setStatus({
+          submitting: false,
+          submitted: true,
+          success: false,
+          message: data.message || "Something went wrong. Please try again."
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setStatus({
+        submitting: false,
+        submitted: true,
+        success: false,
+        message: "Network error. Please check your connection and try again."
+      });
+    }
+  };
+
+
   return (
     <div className="bg-gradient-to-b from-white to-gray-50 py-16 md:py-24 relative overflow-hidden">
       {/* Background decorative elements */}
@@ -44,7 +120,7 @@ const Contact = () => {
               <h3 className="text-2xl font-bold mb-6 text-gray-800">
                 Send Us a Message
               </h3>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label htmlFor="name" className="block text-gray-700 mb-2 font-medium">
@@ -53,8 +129,11 @@ const Contact = () => {
                     <input
                       type="text"
                       id="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                       placeholder="John Doe"
+                      required
                     />
                   </div>
                   <div>
@@ -64,6 +143,8 @@ const Contact = () => {
                     <input
                       type="text"
                       id="company"
+                      value={formData.company}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                       placeholder="Your Company"
                     />
@@ -77,8 +158,11 @@ const Contact = () => {
                     <input
                       type="email"
                       id="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                       placeholder="john@example.com"
+                      required
                     />
                   </div>
                   <div>
@@ -88,8 +172,11 @@ const Contact = () => {
                     <input
                       type="tel"
                       id="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                       placeholder="+91 98765 43210"
+                      required
                     />
                   </div>
                 </div>
@@ -99,17 +186,22 @@ const Contact = () => {
                   </label>
                   <textarea
                     id="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows="5"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                     placeholder="Tell us about your project or inquiry..."
+                    required
                   ></textarea>
                 </div>
                 <motion.button
+                  type="submit"
+                  disabled={status.submitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-4 rounded-lg font-medium w-full shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Submit Inquiry
+                  {status.submitting ? "Submitting..." : "Submit Inquiry"}
                 </motion.button>
               </form>
             </motion.div>
