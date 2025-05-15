@@ -40,15 +40,20 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
               transition={{ duration: 1.0, ease: "easeOut" }}
               onAnimationComplete={() => setLogoAnimationComplete(true)}
             >
-              <img src={logo} alt="Connektixx" className="h-8" />
+              <img src={logo} alt="Connektixx" className="h-8 mt-1.5" />
             </motion.div>
             <motion.span 
               initial={{ x: -20, opacity: 0 }}
               animate={logoAnimationComplete ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              className="ml-2 text-2xl font-bold text-gray-800"
+              className="ml-2 text-2xl text-gray-900 tracking-wide uppercase"
+              style={{ 
+                fontFamily: "'Chakra Petch', 'Saira Semi Condensed', 'Orbitron', sans-serif", 
+                fontWeight: 700, 
+                letterSpacing: '0.02em',
+              }}
             >
-              Connektixx
+              CONNEKTIXX
             </motion.span>
           </div>
 

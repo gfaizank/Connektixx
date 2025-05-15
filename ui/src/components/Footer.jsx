@@ -22,8 +22,17 @@ const Footer = () => {
             className="mb-6 md:mb-0 flex flex-col items-center md:items-start"
           >
             <div className="flex items-center">
-              <img src={logo} alt="Connektixx" className="h-8" />
-              <span className="ml-2 text-2xl font-bold text-gray-800">Connektixx</span>
+              <img src={logo} alt="Connektixx" className="h-8 mt-1" />
+              <span 
+                className="ml-2 text-2xl text-gray-900 tracking-wide uppercase"
+                style={{ 
+                  fontFamily: "'Chakra Petch', 'Saira Semi Condensed', 'Orbitron', sans-serif", 
+                  fontWeight: 700, 
+                  letterSpacing: '0.02em',
+                }}
+              >
+                CONNEKTIXX
+              </span>
             </div>
             <p className="text-sm text-gray-500 mt-2">© 2025 Connektixx Private Limited | <a href="#" className="text-blue-500 hover:underline">Privacy Policy</a></p>
           </motion.div>
