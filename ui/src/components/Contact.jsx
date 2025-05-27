@@ -31,7 +31,7 @@ const Contact = () => {
     setStatus({ submitting: true, submitted: false, success: false, message: "" });
 
     try {
-      const response = await fetch('http://localhost:3000/api/contact', {
+      const response = await fetch('https://connektixx.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
