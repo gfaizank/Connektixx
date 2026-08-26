@@ -1,10 +1,11 @@
-// Updated Home component that uses the context
 import { motion } from "framer-motion";
 import { useActiveSection } from "../context/ActiveSectionContext";
+import { useContent } from "../context/ContentContext";
 
 const Home = ({ scrollToSection, contactRef }) => {
-  // Get active section data from context
   const { activeSection } = useActiveSection();
+  const { content } = useContent();
+  const h = content.home;
 
   // Animation variants
   const fadeIn = {
@@ -38,9 +39,9 @@ const Home = ({ scrollToSection, contactRef }) => {
               variants={fadeIn}
               className="text-4xl md:text-5xl lg:text-6xl font-bold"
             >
-              <span className="text-blue-700">Bridging Connections, </span>
+              <span className="text-blue-700">{h.headline1} </span>
               <br />
-              <span className="text-purple-600">Driving Success</span>
+              <span className="text-purple-600">{h.headline2}</span>
               <motion.div
                 className="w-40 h-1 bg-purple-500 mt-2 mx-auto md:mt-4"
                 initial={{ width: 0 }}
@@ -53,13 +54,8 @@ const Home = ({ scrollToSection, contactRef }) => {
               variants={fadeIn}
               className="mt-6 md:mt-8 text-base md:text-lg text-gray-700"
             >
-              <p className="mb-2">
-                5+ years | 511+ Brands | 60+ Crore Ad spent
-              </p>
-              <p>
-                A dedicated team of specialists, delivering remarkable work to
-                our clients worldwide!
-              </p>
+              <p className="mb-2">{h.stats}</p>
+              <p>{h.subtext}</p>
             </motion.div>
 
             <motion.div variants={fadeIn} className="mt-8 md:mt-10">
@@ -69,7 +65,7 @@ const Home = ({ scrollToSection, contactRef }) => {
                 className="bg-gray-900 text-white px-8 py-4 rounded font-medium text-lg"
                 onClick={() => scrollToSection(contactRef)}
               >
-                Let's Connect
+                {h.cta}
               </motion.button>
             </motion.div>
           </motion.div>
@@ -82,20 +78,13 @@ const Home = ({ scrollToSection, contactRef }) => {
           transition={{ delay: 0.8, duration: 0.5 }}
           className="mt-8 md:mt-12 text-center"
         >
-          <p className="text-base md:text-lg text-gray-700 mb-6">
-            Our Performance Marketing Services are Certified by
-          </p>
+          <p className="text-base md:text-lg text-gray-700 mb-6">{h.certLabel}</p>
           <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-            {/* Partner logos */}
-            <div className="w-32 h-12 bg-gray-100 flex items-center justify-center rounded">
-              <span className="text-gray-500">Meta Partner</span>
-            </div>
-            <div className="w-32 h-12 bg-gray-100 flex items-center justify-center rounded">
-              <span className="text-gray-500">Shopify</span>
-            </div>
-            <div className="w-32 h-12 bg-gray-100 flex items-center justify-center rounded">
-              <span className="text-gray-500">Google</span>
-            </div>
+            {h.partners.map((p, i) => (
+              <div key={i} className="w-32 h-12 bg-gray-100 flex items-center justify-center rounded">
+                <span className="text-gray-500">{p}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

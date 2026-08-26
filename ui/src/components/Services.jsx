@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
+import { useContent } from '../context/ContentContext';
 
 const Services = () => {
-  const serviceCategories = [
+  const { content } = useContent();
+  const sv = content.services;
+  const serviceCategories = sv.categories ?? [
     {
       category: "BPO / Call Centre Services",
       tagline: "Smart, Scalable, Human-Centered Support!",
@@ -121,16 +124,12 @@ const Services = () => {
           className="text-center mb-16"
         >
           <div className="inline-block mb-3 px-4 py-1 rounded-full bg-purple-100 text-purple-700 font-medium">
-            Our Services
+            {sv.pill}
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-800">What We Offer</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-800">{sv.heading}</h2>
           <div className="w-24 h-1 bg-purple-500 mx-auto mt-6"></div>
-          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
-            Scalable, Smart, and Seamless Solutions
-          </p>
-          <p className="mt-4 text-gray-600 max-w-3xl mx-auto">
-            At Connektixx, we bring together strategic thinking, creativity, and technology to help you grow faster and connect better. From marketing strategy to digital campaigns to customer engagement, we've got you covered.
-          </p>
+          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">{sv.subheading}</p>
+          <p className="mt-4 text-gray-600 max-w-3xl mx-auto">{sv.body}</p>
         </motion.div>
         
         {serviceCategories.map((category, categoryIndex) => {

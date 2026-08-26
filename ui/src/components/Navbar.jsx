@@ -1,8 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import logo from '../assets/PNG-1.png'
+import logo from '../assets/PNG-1.png';
+import { useContent } from '../context/ContentContext';
 
 const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
+  const { content } = useContent();
+  const nb = content.navbar;
   const [scrolled, setScrolled] = useState(false);
   const [logoAnimationComplete, setLogoAnimationComplete] = useState(false);
 
@@ -53,7 +56,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
                 letterSpacing: '0.02em',
               }}
             >
-              CONNEKTIXX
+              {nb.brandName}
             </motion.span>
           </div>
 
@@ -74,7 +77,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
               className="bg-gray-900 text-white px-6 py-3 rounded-md font-medium"
               onClick={() => window.open('#contact', '_self')}
             >
-              Chat Now
+              {nb.chatCta}
             </motion.button>
           </div>
 
@@ -128,7 +131,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
                 letterSpacing: '0.02em',
               }}
             >
-              CONNEKTIXX
+              {nb.brandName}
             </motion.span>
               </div>
 
