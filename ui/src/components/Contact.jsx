@@ -14,8 +14,7 @@ const Contact = () => {
     e.preventDefault();
     setStatus({ submitting: true, submitted: false, success: false, message: "" });
     try {
-      const API = import.meta.env.VITE_API_URL || 'https://connektixx.onrender.com';
-      const res = await fetch(`${API}/api/contact`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
+      const res = await fetch('https://connektixx.onrender.com/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
       const data = await res.json();
       if (data.status === 'success') {
         setStatus({ submitting: false, submitted: true, success: true, message: data.message });
