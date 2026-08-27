@@ -12,6 +12,7 @@ import WhyChoose from "./components/Choose";
 import Faq from "./components/Faq";
 import Contact from "./components/Contact";
 import DotNavigation from "./components/DotNavigation";
+import ChatWidget from "./components/ChatWidget";
 import AdminApp from "./admin/AdminApp";
 
 const MainSite = () => {
@@ -52,6 +53,7 @@ const MainSite = () => {
           <section ref={contactRef} id="contact"><Contact /></section>
         </main>
         <DotNavigation />
+        <ChatWidget />
         <Footer />
       </div>
     </ActiveSectionProvider>

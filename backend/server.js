@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import Anthropic from '@anthropic-ai/sdk';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -79,6 +80,32 @@ app.post('/api/contact', async (req, res) => {
       status: 'error',
       message: 'Failed to send message. Please try again later.'
     });
+  }
+});
+
+// Chat endpoint (Anthropic)
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+const SYSTEM_PROMPT = `You are Connie, a friendly and knowledgeable AI assistant for Connektixx — a performance marketing agency specialising in Meta Ads, Google Ads, Shopify growth, and influencer marketing. You help visitors understand Connektixx's services, answer questions about performance marketing, and guide them towards booking a consultation. Keep replies concise (2-4 sentences max) and conversational. If asked something outside your scope, politely redirect to Connektixx's offerings or suggest they fill out the contact form.`;
+
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { messages } = req.body;
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return res.status(400).json({ status: 'error', message: 'messages array required' });
+    }
+
+    const response = await anthropic.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 512,
+      system: SYSTEM_PROMPT,
+      messages,
+    });
+
+    res.json({ status: 'success', reply: response.content[0].text });
+  } catch (error) {
+    console.error('Chat error:', error);
+    res.status(500).json({ status: 'error', message: 'Failed to get response. Please try again.' });
   }
 });
 
