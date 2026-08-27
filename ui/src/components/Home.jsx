@@ -7,95 +7,134 @@ const Home = ({ scrollToSection, contactRef }) => {
   const { content } = useContent();
   const h = content.home;
 
-  // Animation variants
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8 },
-    },
-  };
-
   return (
-    <div className="relative bg-gradient-to-br from-purple-50 to-white min-h-screen pt-24 pb-16">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        <div className="pt-24 md:pt-32 lg:pt-36 pb-12">
-          {/* Main headline - Center alignment */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.2,
-                },
-              },
-            }}
-            className="text-center max-w-4xl mx-auto"
+    <div className="relative min-h-screen overflow-hidden animated-bg flex flex-col">
+      {/* ── Animated gradient orbs ───────────────────── */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <div className="orb-a absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full opacity-40"
+          style={{ background: 'radial-gradient(circle, #7c3aed 0%, #4f46e5 40%, transparent 70%)' }} />
+        <div className="orb-b absolute top-1/4 right-0 w-[420px] h-[420px] rounded-full opacity-30"
+          style={{ background: 'radial-gradient(circle, #3b82f6 0%, #6366f1 50%, transparent 70%)' }} />
+        <div className="orb-c absolute bottom-0 left-1/3 w-[380px] h-[380px] rounded-full opacity-25"
+          style={{ background: 'radial-gradient(circle, #a855f7 0%, #ec4899 50%, transparent 70%)' }} />
+        <div className="orb-a absolute top-2/3 right-1/4 w-[260px] h-[260px] rounded-full opacity-20"
+          style={{ background: 'radial-gradient(circle, #06b6d4 0%, #3b82f6 50%, transparent 70%)', animationDelay: '-7s' }} />
+        {/* Grid overlay */}
+        <div className="absolute inset-0 opacity-[0.04]"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      </div>
+
+      {/* ── Main hero content ────────────────────────── */}
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-4 pt-28 pb-12 md:pt-40 md:pb-16 text-center">
+
+        {/* Badge pill */}
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full glass text-purple-300 text-sm font-semibold tracking-wide"
+        >
+          <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+          {h.stats}
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight max-w-4xl mx-auto"
+        >
+          <span className="text-white">{h.headline1}</span>
+          <br />
+          <span className="gradient-text">{h.headline2}</span>
+        </motion.h1>
+
+        {/* Underline accent */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+          className="mt-4 h-1 w-32 mx-auto rounded-full"
+          style={{ background: 'linear-gradient(90deg, #7c3aed, #3b82f6)' }}
+        />
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-6 text-base sm:text-lg text-white/60 max-w-xl mx-auto leading-relaxed"
+        >
+          {h.subtext}
+        </motion.p>
+
+        {/* CTA buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-8 flex flex-col sm:flex-row gap-3 justify-center"
+        >
+          <motion.button
+            whileHover={{ scale: 1.04, boxShadow: '0 0 32px rgba(124,58,237,0.5)' }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => scrollToSection(contactRef)}
+            className="shimmer-btn relative px-8 py-4 rounded-xl font-bold text-white text-base"
+            style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #3b82f6 100%)' }}
           >
-            <motion.h1
-              variants={fadeIn}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold"
-            >
-              <span className="text-blue-700">{h.headline1} </span>
-              <br />
-              <span className="text-purple-600">{h.headline2}</span>
-              <motion.div
-                className="w-40 h-1 bg-purple-500 mt-2 mx-auto md:mt-4"
-                initial={{ width: 0 }}
-                animate={{ width: 180 }}
-                transition={{ delay: 1, duration: 0.5 }}
-              />
-            </motion.h1>
+            {h.cta}
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.04, background: 'rgba(255,255,255,0.12)' }}
+            whileTap={{ scale: 0.97 }}
+            className="px-8 py-4 rounded-xl font-bold text-white/80 text-base glass"
+          >
+            See Our Work ↓
+          </motion.button>
+        </motion.div>
 
-            <motion.div
-              variants={fadeIn}
-              className="mt-6 md:mt-8 text-base md:text-lg text-gray-700"
-            >
-              <p className="mb-2">{h.stats}</p>
-              <p>{h.subtext}</p>
-            </motion.div>
-
-            <motion.div variants={fadeIn} className="mt-8 md:mt-10">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gray-900 text-white px-8 py-4 rounded font-medium text-lg"
-                onClick={() => scrollToSection(contactRef)}
-              >
-                {h.cta}
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Certification Section */}
+        {/* Stats pills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="mt-8 md:mt-12 text-center"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-10 flex flex-wrap justify-center gap-3"
         >
-          <p className="text-base md:text-lg text-gray-700 mb-6">{h.certLabel}</p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-            {h.partners.map((p, i) => (
-              <div key={i} className="w-32 h-12 bg-gray-100 flex items-center justify-center rounded">
-                <span className="text-gray-500">{p}</span>
-              </div>
-            ))}
-          </div>
+          {['5+ Years Experience', '511+ Brands Served', '60+ Cr Ad Spend'].map((stat, i) => (
+            <div key={i} className="glass px-4 py-2 rounded-full text-sm text-white/70 font-medium">
+              {stat}
+            </div>
+          ))}
         </motion.div>
       </div>
-      
-      {/* Debug Panel - Remove in production */}
-      {/* {process.env.NODE_ENV !== 'production' && (
-        <div className="fixed bottom-4 left-4 bg-white p-4 shadow-lg rounded-lg z-50 text-sm opacity-75 hover:opacity-100 transition-opacity">
-          <h3 className="font-bold mb-2">Debug Info:</h3>
-          <p>Active Section Index: {activeSection}</p>
+
+      {/* ── Certification row ────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="relative z-10 pb-12 px-4 text-center"
+      >
+        <p className="text-white/40 text-xs sm:text-sm uppercase tracking-widest mb-5 font-medium">
+          {h.certLabel}
+        </p>
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-lg mx-auto">
+          {h.partners.map((partner, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05, background: 'rgba(255,255,255,0.14)' }}
+              className="glass px-5 py-2.5 rounded-xl text-white/70 text-sm font-semibold transition-all cursor-default"
+            >
+              {partner}
+            </motion.div>
+          ))}
         </div>
-      )} */}
+      </motion.div>
+
+      {/* ── Bottom fade into next section ───────────── */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.04))' }} />
     </div>
   );
 };
