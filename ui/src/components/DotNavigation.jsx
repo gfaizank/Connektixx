@@ -33,11 +33,11 @@ const DotNavigation = () => {
                 whileHover={{ scale: 1.25 }}
                 animate={{ 
                   scale: index === activeSection ? 1.25 : 1,
-                  backgroundColor: index === activeSection 
-                    ? "#9333ea" 
-                    : index < activeSection 
-                      ? "#c084fc" // Light purple for passed sections
-                      : "#d1d5db"  // Gray for upcoming sections
+                  backgroundColor: index === activeSection
+                    ? "#FF541C"
+                    : index < activeSection
+                      ? "#FF8A5B"
+                      : "#d1d5db"
                 }}
                 transition={{ 
                   duration: 0.3,
