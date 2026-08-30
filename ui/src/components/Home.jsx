@@ -36,7 +36,7 @@ const Home = ({ scrollToSection, contactRef }) => {
           style={{ background: 'rgba(255,84,28,0.2)', border: '1px solid rgba(255,84,28,0.3)', color: '#FF8A5B' }}
         >
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#FF541C' }} />
-          {h.stats}
+          {h.eyebrow}
         </motion.div>
 
         {/* Headline */}
@@ -46,9 +46,7 @@ const Home = ({ scrollToSection, contactRef }) => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight max-w-4xl mx-auto"
         >
-          <span className="text-white">{h.headline1}</span>
-          <br />
-          <span className="gradient-text">{h.headline2}</span>
+          <span className="gradient-text">{h.headline}</span>
         </motion.h1>
 
         {/* Underline accent */}
@@ -92,48 +90,24 @@ const Home = ({ scrollToSection, contactRef }) => {
             className="px-8 py-4 rounded-xl font-bold text-white text-base glass"
             style={{ border: '1px solid rgba(255,84,28,0.4)' }}
           >
-            See Our Work ↓
+            {h.ctaSecondary}
           </motion.button>
         </motion.div>
 
-        {/* Stats pills */}
+        {/* Chip pills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-10 flex flex-wrap justify-center gap-3"
         >
-          {['5+ Years Experience', '511+ Brands Served', '60+ Cr Ad Spend'].map((stat, i) => (
+          {(h.chips ?? []).map((chip, i) => (
             <div key={i} className="glass px-4 py-2 rounded-full text-sm text-white/70 font-medium">
-              {stat}
+              {chip}
             </div>
           ))}
         </motion.div>
       </div>
-
-      {/* ── Certification row ────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="relative z-10 pb-12 px-4 text-center"
-      >
-        <p className="text-xs sm:text-sm uppercase tracking-widest mb-5 font-medium"
-          style={{ color: 'rgba(255,138,91,0.6)' }}>
-          {h.certLabel}
-        </p>
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-lg mx-auto">
-          {h.partners.map((partner, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05, background: 'rgba(255,255,255,0.14)' }}
-              className="glass px-5 py-2.5 rounded-xl text-white/70 text-sm font-semibold transition-all cursor-default"
-            >
-              {partner}
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
 
       {/* ── Bottom fade into next section ───────────── */}
       <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
