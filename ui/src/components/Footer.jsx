@@ -24,7 +24,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="flex flex-col items-center md:items-start gap-2">
             <div className="flex items-center gap-2">
-              <Logo size={36} id="ft" />
+              <Logo size={36} />
               <span className="text-xl font-black tracking-widest uppercase"
                 style={{ fontFamily: "'Chakra Petch','Orbitron',sans-serif", background: 'linear-gradient(135deg, #FF8A5B, #FF541C, #D9430F)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 {ft.brandName}

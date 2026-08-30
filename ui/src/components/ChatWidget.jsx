@@ -9,8 +9,7 @@ const TypingDots = () => (
   <div className="flex items-center gap-1 px-4 py-3">
     {[0, 1, 2].map(i => (
       <span key={i} className="w-2 h-2 rounded-full"
-        style={{ background: '#FF8A5B' }}
-        style={{ animation: `bounce 1.2s ${i * 0.2}s infinite` }} />
+        style={{ background: '#FF8A5B', animation: `bounce 1.2s ${i * 0.2}s infinite` }} />
     ))}
   </div>
 );
@@ -81,7 +80,7 @@ const ChatWidget = () => {
           >
             {/* Header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'linear-gradient(135deg, rgba(255,84,28,0.3), rgba(217,67,15,0.2))', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-              <Logo size={32} id="chat" />
+              <Logo size={32} />
               <div>
                 <p style={{ color: '#fff', fontWeight: 700, fontSize: 14, lineHeight: 1 }}>Connie</p>
                 <p style={{ color: '#FF8A5B', fontSize: 11, marginTop: 2 }}>Connektixx AI Assistant</p>

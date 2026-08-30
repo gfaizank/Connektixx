@@ -42,7 +42,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
               transition={{ duration: 1.0, ease: 'easeOut' }}
               onAnimationComplete={() => setLogoAnimationComplete(true)}
             >
-              <Logo size={40} id="nav" />
+              <Logo size={40} />
             </motion.div>
             <motion.span
               initial={{ x: -16, opacity: 0 }}
@@ -110,7 +110,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
             <div className="flex items-center justify-between px-4 py-4"
               style={{ borderBottom: '1px solid rgba(255, 84, 28, 0.25)' }}>
               <div className="flex items-center gap-2">
-                <Logo size={40} id="mob" />
+                <Logo size={40} />
                 <span className="text-lg font-black tracking-widest uppercase"
                   style={{ fontFamily: "'Chakra Petch','Orbitron',sans-serif", background: 'linear-gradient(135deg, #FF8A5B, #FF541C, #FFB347)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   {nb.brandName}
