@@ -25,11 +25,11 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
           background: scrolled
-            ? 'rgba(10, 8, 30, 0.85)'
-            : 'rgba(10, 8, 30, 0.3)',
+            ? 'rgba(35, 38, 46, 0.9)'
+            : 'rgba(35, 38, 46, 0.25)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: scrolled ? '1px solid rgba(139, 92, 246, 0.2)' : '1px solid transparent',
+          borderBottom: scrolled ? '1px solid rgba(255, 84, 28, 0.25)' : '1px solid transparent',
           boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.3)' : 'none',
         }}
       >
@@ -51,7 +51,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
               className="text-xl font-black tracking-widest uppercase"
               style={{
                 fontFamily: "'Chakra Petch', 'Orbitron', sans-serif",
-                background: 'linear-gradient(135deg, #c4b5fd, #818cf8, #7dd3fc)',
+                background: 'linear-gradient(135deg, #FF8A5B, #FF541C, #FFB347)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -67,17 +67,17 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
               <motion.button
                 key={i}
                 onClick={() => scrollToSection(item.ref)}
-                whileHover={{ color: '#a78bfa' }}
-                className="text-white/70 hover:text-purple-300 font-medium text-sm transition-colors"
+                whileHover={{ color: '#FF8A5B' }}
+                className="text-white/70 hover:text-orange-400 font-medium text-sm transition-colors"
               >
                 {item.name}
               </motion.button>
             ))}
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(124,58,237,0.4)' }}
+              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,84,28,0.4)' }}
               whileTap={{ scale: 0.96 }}
               className="px-5 py-2.5 rounded-lg font-bold text-white text-sm shimmer-btn"
-              style={{ background: 'linear-gradient(135deg, #7c3aed, #4f46e5)' }}
+              style={{ background: 'linear-gradient(135deg, #FF541C, #D9430F)' }}
             >
               {nb.chatCta}
             </motion.button>
@@ -108,11 +108,11 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-4"
-              style={{ borderBottom: '1px solid rgba(139,92,246,0.2)' }}>
+              style={{ borderBottom: '1px solid rgba(255, 84, 28, 0.25)' }}>
               <div className="flex items-center gap-2">
                 <Logo size={40} id="mob" />
                 <span className="text-lg font-black tracking-widest uppercase"
-                  style={{ fontFamily: "'Chakra Petch','Orbitron',sans-serif", background: 'linear-gradient(135deg, #c4b5fd, #818cf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                  style={{ fontFamily: "'Chakra Petch','Orbitron',sans-serif", background: 'linear-gradient(135deg, #FF8A5B, #FF541C, #FFB347)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   {nb.brandName}
                 </span>
               </div>
@@ -130,7 +130,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06, duration: 0.3 }}
                   onClick={() => scrollToSection(item.ref)}
-                  className="text-left text-xl font-semibold text-white/80 hover:text-purple-300 py-3 px-4 rounded-xl hover:bg-white/5 transition-all"
+                  className="text-left text-xl font-semibold text-white/80 hover:text-orange-400 py-3 px-4 rounded-xl hover:bg-white/5 transition-all"
                 >
                   {item.name}
                 </motion.button>
@@ -140,7 +140,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navItems.length * 0.06 + 0.1 }}
                 className="mt-4 py-4 rounded-xl font-bold text-white text-lg shimmer-btn"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #4f46e5)' }}
+                style={{ background: 'linear-gradient(135deg, #FF541C, #D9430F)' }}
               >
                 {nb.chatCta}
               </motion.button>

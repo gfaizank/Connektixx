@@ -8,7 +8,8 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://connektixx.onrender.com
 const TypingDots = () => (
   <div className="flex items-center gap-1 px-4 py-3">
     {[0, 1, 2].map(i => (
-      <span key={i} className="w-2 h-2 rounded-full bg-purple-400"
+      <span key={i} className="w-2 h-2 rounded-full"
+        style={{ background: '#FF8A5B' }}
         style={{ animation: `bounce 1.2s ${i * 0.2}s infinite` }} />
     ))}
   </div>
@@ -73,17 +74,17 @@ const ChatWidget = () => {
               position: 'absolute', bottom: '5.5rem', right: '1.5rem',
               width: 360, borderRadius: 16, overflow: 'hidden',
               boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
-              background: 'linear-gradient(160deg, #1e1b4b, #0f0a28)',
-              border: '1px solid rgba(124,58,237,0.3)',
+              background: 'linear-gradient(160deg, #23262E, #1A1D23)',
+              border: '1px solid rgba(255,84,28,0.3)',
               pointerEvents: 'auto',
             }}
           >
             {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(79,70,229,0.3))', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'linear-gradient(135deg, rgba(255,84,28,0.3), rgba(217,67,15,0.2))', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
               <Logo size={32} id="chat" />
               <div>
                 <p style={{ color: '#fff', fontWeight: 700, fontSize: 14, lineHeight: 1 }}>Connie</p>
-                <p style={{ color: '#c084fc', fontSize: 11, marginTop: 2 }}>Connektixx AI Assistant</p>
+                <p style={{ color: '#FF8A5B', fontSize: 11, marginTop: 2 }}>Connektixx AI Assistant</p>
               </div>
               <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span className="animate-pulse" style={{ width: 8, height: 8, borderRadius: '50%', background: '#34d399', display: 'inline-block' }} />
@@ -97,12 +98,12 @@ const ChatWidget = () => {
                 <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}
                   style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
                   {m.role === 'assistant' && (
-                    <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, marginRight: 8, marginTop: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #7c3aed, #4f46e5)', fontSize: 11, fontWeight: 700, color: '#fff' }}>C</div>
+                    <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, marginRight: 8, marginTop: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #FF541C, #D9430F)', fontSize: 11, fontWeight: 700, color: '#fff' }}>C</div>
                   )}
                   <div style={{
                     maxWidth: '75%', padding: '10px 14px', borderRadius: m.role === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
                     fontSize: 13, lineHeight: 1.5,
-                    background: m.role === 'user' ? 'linear-gradient(135deg, #7c3aed, #4f46e5)' : 'rgba(255,255,255,0.07)',
+                    background: m.role === 'user' ? 'linear-gradient(135deg, #FF541C, #D9430F)' : 'rgba(255,255,255,0.07)',
                     backdropFilter: m.role === 'assistant' ? 'blur(16px)' : 'none',
                     border: m.role === 'assistant' ? '1px solid rgba(255,255,255,0.12)' : 'none',
                     color: m.role === 'user' ? '#fff' : 'rgba(255,255,255,0.85)',
@@ -113,7 +114,7 @@ const ChatWidget = () => {
               ))}
               {loading && (
                 <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                  <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, marginRight: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #7c3aed, #4f46e5)', fontSize: 11, fontWeight: 700, color: '#fff' }}>C</div>
+                  <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, marginRight: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #FF541C, #D9430F)', fontSize: 11, fontWeight: 700, color: '#fff' }}>C</div>
                   <div style={{ background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '16px 16px 16px 4px' }}>
                     <TypingDots />
                   </div>
@@ -137,7 +138,7 @@ const ChatWidget = () => {
                 <button
                   onClick={send}
                   disabled={!input.trim() || loading}
-                  style={{ flexShrink: 0, width: 32, height: 32, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #7c3aed, #4f46e5)', border: 'none', cursor: 'pointer', opacity: (!input.trim() || loading) ? 0.3 : 1, transition: 'opacity 0.2s' }}
+                  style={{ flexShrink: 0, width: 32, height: 32, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #FF541C, #D9430F)', border: 'none', cursor: 'pointer', opacity: (!input.trim() || loading) ? 0.3 : 1, transition: 'opacity 0.2s' }}
                 >
                   <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" /></svg>
                 </button>
@@ -158,8 +159,8 @@ const ChatWidget = () => {
           style={{
             width: 56, height: 56, borderRadius: '50%', border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-            boxShadow: '0 0 28px rgba(124,58,237,0.55)',
+            background: 'linear-gradient(135deg, #FF541C, #D9430F)',
+            boxShadow: '0 0 28px rgba(255,84,28,0.55)',
           }}
         >
           <AnimatePresence mode="wait">

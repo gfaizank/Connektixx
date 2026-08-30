@@ -1,41 +1,52 @@
 const Logo = ({ size = 40, id = 'a' }) => {
-  const grad = `logoGrad-${id}`;
-  const hub = `hubGrad-${id}`;
+  const og = `og-${id}`;   // orange gradient
+  const dg = `dg-${id}`;   // dark gradient
   return (
-    <svg width={size} height={size} viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 108 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id={grad} x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#c4b5fd" />
-          <stop offset="50%" stopColor="#818cf8" />
-          <stop offset="100%" stopColor="#7dd3fc" />
+        <linearGradient id={og} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FF8A5B" />
+          <stop offset="100%" stopColor="#FF541C" />
         </linearGradient>
-        <radialGradient id={hub} cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#a78bfa" />
-          <stop offset="100%" stopColor="#6366f1" />
+        <radialGradient id={dg} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#3D424E" />
+          <stop offset="100%" stopColor="#2D313A" />
         </radialGradient>
       </defs>
 
-      {/* C arc */}
-      <path
-        d="M 34 12 A 15 15 0 1 0 34 32"
-        stroke={`url(#${grad})`}
-        strokeWidth="3"
-        strokeLinecap="round"
-        fill="none"
-      />
+      {/* Outer orange C arc — opens on the right */}
+      <path d="M 70 20 A 38 38 0 1 0 70 80"
+        stroke={`url(#${og})`} strokeWidth="7" strokeLinecap="round" fill="none" />
 
-      {/* Connection lines from hub to outer nodes */}
-      <line x1="22" y1="22" x2="34" y2="12" stroke={`url(#${grad})`} strokeWidth="1.5" strokeLinecap="round" opacity="0.65" />
-      <line x1="22" y1="22" x2="34" y2="32" stroke={`url(#${grad})`} strokeWidth="1.5" strokeLinecap="round" opacity="0.65" />
-      <line x1="22" y1="22" x2="7"  y2="22" stroke={`url(#${grad})`} strokeWidth="1.5" strokeLinecap="round" opacity="0.65" />
+      {/* Inner orange C arc */}
+      <path d="M 61 31 A 25 25 0 1 0 61 69"
+        stroke={`url(#${og})`} strokeWidth="6" strokeLinecap="round" fill="none" />
 
-      {/* Outer nodes */}
-      <circle cx="34" cy="12" r="3"   fill={`url(#${grad})`} />
-      <circle cx="34" cy="32" r="3"   fill={`url(#${grad})`} />
-      <circle cx="7"  cy="22" r="3"   fill={`url(#${grad})`} />
+      {/* Small orange arc accent — lower inner ring */}
+      <path d="M 66 68 A 25 25 0 0 0 68 60"
+        stroke="#FF541C" strokeWidth="5.5" strokeLinecap="round" fill="none" />
 
-      {/* Center hub */}
-      <circle cx="22" cy="22" r="4.5" fill={`url(#${hub})`} />
+      {/* Connector arms */}
+      <line x1="41" y1="50" x2="70" y2="18" stroke={`url(#${dg})`} strokeWidth="9" strokeLinecap="round" />
+      <line x1="41" y1="50" x2="68" y2="80" stroke={`url(#${dg})`} strokeWidth="9" strokeLinecap="round" />
+
+      {/* Hub circle */}
+      <circle cx="41" cy="50" r="9" fill={`url(#${dg})`} />
+
+      {/* Upper node */}
+      <circle cx="70" cy="17" r="12" fill={`url(#${dg})`} />
+
+      {/* Lower node (teardrop shape) */}
+      <circle cx="68" cy="81" r="10" fill={`url(#${dg})`} />
+
+      {/* Orange accent dot — top right */}
+      <circle cx="86" cy="15" r="5.5" fill="#FF541C" />
+
+      {/* Dark accent dot — left */}
+      <circle cx="6" cy="44" r="4.5" fill="#2D313A" />
+
+      {/* Small orange dot — lower right */}
+      <circle cx="91" cy="70" r="3.5" fill="#FF8A5B" />
     </svg>
   );
 };

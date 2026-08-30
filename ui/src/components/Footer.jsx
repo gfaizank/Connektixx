@@ -13,10 +13,10 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f0a28 0%, #1e1b4b 50%, #0e2042 100%)' }}>
+    <footer className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #23262E 0%, #2D313A 50%, #1A1D23 100%)' }}>
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-15" style={{ background: 'radial-gradient(circle, #7c3aed, transparent 70%)', filter: 'blur(50px)' }} />
-        <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #3b82f6, transparent 70%)', filter: 'blur(50px)' }} />
+        <div className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-15" style={{ background: 'radial-gradient(circle, #FF541C, transparent 70%)', filter: 'blur(50px)' }} />
+        <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #FF8A5B, transparent 70%)', filter: 'blur(50px)' }} />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
       </div>
 
@@ -26,18 +26,18 @@ const Footer = () => {
             <div className="flex items-center gap-2">
               <Logo size={36} id="ft" />
               <span className="text-xl font-black tracking-widest uppercase"
-                style={{ fontFamily: "'Chakra Petch','Orbitron',sans-serif", background: 'linear-gradient(135deg, #c4b5fd, #818cf8, #7dd3fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                style={{ fontFamily: "'Chakra Petch','Orbitron',sans-serif", background: 'linear-gradient(135deg, #FF8A5B, #FF541C, #D9430F)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 {ft.brandName}
               </span>
             </div>
             <p className="text-white/35 text-sm">
-              {ft.copyright} <a href={ft.privacyUrl} className="text-purple-400 hover:text-purple-300 transition-colors">{ft.privacyLabel}</a>
+              {ft.copyright} <a href={ft.privacyUrl} className="transition-colors" style={{ color: '#FF8A5B' }} onMouseEnter={e => e.currentTarget.style.color = '#FF541C'} onMouseLeave={e => e.currentTarget.style.color = '#FF8A5B'}>{ft.privacyLabel}</a>
             </p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="flex gap-4">
             {socials.map((s, i) => (
-              <motion.a key={i} href={s.url} whileHover={{ scale: 1.2, color: '#a78bfa' }} whileTap={{ scale: 0.9 }} className="text-white/40 hover:text-purple-300 transition-colors">
+              <motion.a key={i} href={s.url} whileHover={{ scale: 1.2, color: '#FF8A5B' }} whileTap={{ scale: 0.9 }} className="text-white/40 transition-colors" style={{}} onMouseEnter={e => e.currentTarget.style.color = '#FF8A5B'} onMouseLeave={e => e.currentTarget.style.color = ''}>
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d={s.d} clipRule="evenodd" /></svg>
               </motion.a>
             ))}

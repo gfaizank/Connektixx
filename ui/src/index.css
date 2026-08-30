@@ -1,4 +1,20 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ── Brand tokens ──────────────────────────────────────── */
+:root {
+  --accent:       #FF541C;
+  --accent-light: #FF8A5B;
+  --accent-deep:  #D9430F;
+  --ink:          #2D313A;
+  --ink-deep:     #23262E;
+  --ink-soft:     #565C66;
+  --dark-bg-2:    #363B45;
+  --dark-line:    #454B56;
+  --dark-muted:   #B7BEC7;
+  --sand:         #F2EFEA;
+  --cream:        #F0ECE4;
+}
 
 html { scroll-behavior: smooth; }
 
@@ -7,94 +23,56 @@ body {
   overflow-x: hidden;
 }
 
+h1, h2, h3 {
+  font-family: 'Noto Serif', Georgia, 'Times New Roman', serif;
+}
+
 /* ── Glassmorphism ─────────────────────────────────────── */
 .glass {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.13);
 }
 .glass-light {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 32px rgba(255, 84, 28, 0.07);
 }
 .glass-dark {
-  background: rgba(15, 10, 40, 0.55);
+  background: rgba(35, 38, 46, 0.55);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(139, 92, 246, 0.25);
+  border: 1px solid rgba(255, 84, 28, 0.2);
 }
 .glass-card {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-/* ── Animated gradient text ────────────────────────────── */
+/* ── Gradient text (brand orange) ──────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 25%, #818cf8 50%, #7dd3fc 75%, #c4b5fd 100%);
+  background: linear-gradient(135deg, #FFB347 0%, #FF8A5B 35%, #FF541C 65%, #FFB347 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 300% 300%;
   animation: gradientShift 6s ease infinite;
 }
-.gradient-text-blue {
-  background: linear-gradient(135deg, #60a5fa 0%, #6366f1 50%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 
-/* ── Keyframes ─────────────────────────────────────────── */
-@keyframes gradientShift {
-  0%   { background-position: 0%   50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0%   50%; }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  33%       { transform: translateY(-28px) scale(1.06); }
-  66%       { transform: translateY(14px) scale(0.96); }
-}
-@keyframes floatB {
-  0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
-  40%       { transform: translateY(20px) translateX(-20px) scale(0.95); }
-  70%       { transform: translateY(-16px) translateX(16px) scale(1.04); }
-}
-@keyframes floatC {
-  0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
-  50%       { transform: translateY(-22px) scale(1.08) rotate(8deg); }
-}
-@keyframes bgPan {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position:  200% 0; }
-}
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-.orb-a { animation: float  14s ease-in-out infinite; }
-.orb-b { animation: floatB 18s ease-in-out infinite; }
-.orb-c { animation: floatC 22s ease-in-out infinite; }
-
+/* ── Animated background (dark charcoal) ───────────────── */
 .animated-bg {
-  background: linear-gradient(-45deg, #0f0a28, #1e1b4b, #0e2042, #120828, #1a1040, #0a1929);
+  background: linear-gradient(-45deg, #23262E, #2D313A, #1A1D23, #363B45, #2D313A, #23262E);
   background-size: 400% 400%;
   animation: bgPan 20s ease infinite;
 }
 
+/* ── Shimmer button ────────────────────────────────────── */
 .shimmer-btn {
   position: relative;
   overflow: hidden;
@@ -106,4 +84,39 @@ body {
   background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 2.5s infinite;
+}
+
+/* ── Orb animations ────────────────────────────────────── */
+.orb-a { animation: float  14s ease-in-out infinite; }
+.orb-b { animation: floatB 18s ease-in-out infinite; }
+.orb-c { animation: floatC 22s ease-in-out infinite; }
+
+/* ── Keyframes ─────────────────────────────────────────── */
+@keyframes gradientShift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+@keyframes bgPan {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  33%       { transform: translateY(-28px) scale(1.06); }
+  66%       { transform: translateY(14px)  scale(0.96); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0px) translateX(0px)   scale(1); }
+  40%       { transform: translateY(20px) translateX(-20px) scale(0.95); }
+  70%       { transform: translateY(-16px) translateX(16px) scale(1.04); }
+}
+@keyframes floatC {
+  0%, 100% { transform: translateY(0px)  scale(1)    rotate(0deg); }
+  50%       { transform: translateY(-22px) scale(1.08) rotate(8deg); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
 }

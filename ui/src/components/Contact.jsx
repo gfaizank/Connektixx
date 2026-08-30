@@ -27,23 +27,23 @@ const Contact = () => {
     }
   };
 
-  const inputCls = "w-full px-4 py-3.5 rounded-xl text-gray-800 text-sm font-medium outline-none transition-all glass-light focus:border-purple-400 focus:ring-2 focus:ring-purple-200 placeholder:text-gray-400";
+  const inputCls = "w-full px-4 py-3.5 rounded-xl text-gray-800 text-sm font-medium outline-none transition-all glass-light focus:border-orange-400 focus:ring-2 focus:ring-orange-100 placeholder:text-gray-400";
 
   return (
-    <div className="relative py-20 md:py-28 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f0edff 0%, #e8f4ff 100%)' }}>
+    <div className="relative py-20 md:py-28 overflow-hidden" style={{ background: 'linear-gradient(180deg, #F2EFEA 0%, #F0ECE4 100%)' }}>
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full opacity-15" style={{ background: 'radial-gradient(circle, #7c3aed, transparent 70%)', filter: 'blur(70px)' }} />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-12" style={{ background: 'radial-gradient(circle, #3b82f6, transparent 70%)', filter: 'blur(60px)' }} />
+        <div className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full opacity-15" style={{ background: 'radial-gradient(circle, #FF541C, transparent 70%)', filter: 'blur(70px)' }} />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #FF8A5B, transparent 70%)', filter: 'blur(60px)' }} />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-center mb-14">
           <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-bold"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.1), rgba(99,102,241,0.1))', border: '1px solid rgba(124,58,237,0.2)', color: '#7c3aed' }}>
+            style={{ background: 'rgba(255,84,28,0.1)', border: '1px solid rgba(255,84,28,0.25)', color: '#D9430F' }}>
             {ct.pill}
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">{ct.heading}</h2>
-          <div className="w-20 h-1 mx-auto rounded-full mb-5" style={{ background: 'linear-gradient(90deg, #7c3aed, #3b82f6)' }} />
+          <div className="w-20 h-1 mx-auto rounded-full mb-5" style={{ background: 'linear-gradient(90deg, #FF541C, #FF8A5B)' }} />
           <p className="text-gray-500 max-w-xl mx-auto text-base leading-relaxed">{ct.intro}</p>
         </motion.div>
 
@@ -66,10 +66,10 @@ const Contact = () => {
                 <p className={`text-sm font-medium ${status.success ? 'text-emerald-600' : 'text-red-500'}`}>{status.message}</p>
               )}
               <motion.button type="submit" disabled={status.submitting}
-                whileHover={{ scale: 1.02, boxShadow: '0 0 28px rgba(124,58,237,0.35)' }}
+                whileHover={{ scale: 1.02, boxShadow: '0 0 28px rgba(255,84,28,0.35)' }}
                 whileTap={{ scale: 0.97 }}
                 className="w-full py-4 rounded-xl font-bold text-white text-base shimmer-btn"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #4f46e5, #3b82f6)' }}>
+                style={{ background: 'linear-gradient(135deg, #FF541C, #D9430F)' }}>
                 {status.submitting ? "Sending..." : ct.submitBtn}
               </motion.button>
             </form>
@@ -78,9 +78,9 @@ const Contact = () => {
           {/* Info panel */}
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-2 rounded-3xl relative overflow-hidden flex flex-col"
-            style={{ background: 'linear-gradient(135deg, #1e1b4b, #312e81, #1e1b4b)', boxShadow: '0 20px 60px rgba(99,102,241,0.3)' }}>
+            style={{ background: 'linear-gradient(135deg, #2D313A, #23262E)', boxShadow: '0 20px 60px rgba(255,84,28,0.2)' }}>
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full opacity-30" style={{ background: 'radial-gradient(circle, #7c3aed, transparent 70%)', filter: 'blur(30px)' }} />
+              <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full opacity-30" style={{ background: 'radial-gradient(circle, #FF541C, transparent 70%)', filter: 'blur(30px)' }} />
             </div>
             <div className="relative z-10 p-8 flex flex-col h-full">
               <h3 className="text-xl font-black text-white mb-7">{ct.infoHeading}</h3>
@@ -95,7 +95,7 @@ const Contact = () => {
                     <div className="glass-card rounded-xl px-4 py-3.5 flex items-start gap-3 transition-all hover:bg-white/10">
                       <span className="text-xl flex-shrink-0">{item.icon}</span>
                       <div>
-                        <p className="text-purple-300 text-xs font-bold uppercase tracking-wider mb-0.5">{item.label}</p>
+                        <p className="text-xs font-bold uppercase tracking-wider mb-0.5" style={{ color: '#FF8A5B' }}>{item.label}</p>
                         <p className="text-white/70 text-sm">{item.value}</p>
                       </div>
                     </div>
@@ -109,8 +109,8 @@ const Contact = () => {
               <div className="mt-7 pt-6 border-t border-white/10">
                 <p className="text-white font-bold mb-4 text-base">{ct.consultHeading}</p>
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-                  className="w-full py-3.5 rounded-xl font-bold text-purple-900 text-sm"
-                  style={{ background: 'linear-gradient(135deg, #e0e7ff, #c7d2fe)' }}>
+                  className="w-full py-3.5 rounded-xl font-bold text-white text-sm"
+                  style={{ background: 'linear-gradient(135deg, #FF541C, #D9430F)' }}>
                   {ct.consultCta}
                 </motion.button>
               </div>
@@ -122,7 +122,7 @@ const Contact = () => {
                   { url: ct.whatsapp, d: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" },
                   { url: ct.linkedin, d: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" },
                 ].map((s, i) => (
-                  <motion.a key={i} href={s.url} whileHover={{ scale: 1.2, color: '#a78bfa' }} className="text-white/40 hover:text-purple-300 transition-colors">
+                  <motion.a key={i} href={s.url} whileHover={{ scale: 1.2, color: '#FF8A5B' }} className="text-white/40 hover:text-orange-400 transition-colors">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d={s.d} clipRule="evenodd" /></svg>
                   </motion.a>
                 ))}
