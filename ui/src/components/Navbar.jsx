@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { useContent } from '../context/ContentContext';
 
-const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
+const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen, contactRef }) => {
   const { content } = useContent();
   const nb = content.navbar;
   const [scrolled, setScrolled] = useState(false);
@@ -76,10 +76,11 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,84,28,0.4)' }}
               whileTap={{ scale: 0.96 }}
+              onClick={() => scrollToSection(contactRef)}
               className="px-5 py-2.5 rounded-lg font-bold text-white text-sm shimmer-btn"
               style={{ background: 'linear-gradient(135deg, #FF541C, #D9430F)' }}
             >
-              {nb.chatCta}
+              {nb.cta}
             </motion.button>
           </div>
 
@@ -139,10 +140,11 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen }) => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navItems.length * 0.06 + 0.1 }}
-                className="mt-4 py-4 rounded-xl font-bold text-white text-lg shimmer-btn"
+                onClick={() => scrollToSection(contactRef)}
+              className="mt-4 py-4 rounded-xl font-bold text-white text-lg shimmer-btn"
                 style={{ background: 'linear-gradient(135deg, #FF541C, #D9430F)' }}
               >
-                {nb.chatCta}
+                {nb.cta}
               </motion.button>
             </div>
           </motion.div>

@@ -13,6 +13,7 @@ import Faq from "./components/Faq";
 import Contact from "./components/Contact";
 import DotNavigation from "./components/DotNavigation";
 import ChatWidget from "./components/ChatWidget";
+import CookieBanner from "./components/CookieBanner";
 import AdminApp from "./admin/AdminApp";
 
 const MainSite = () => {
@@ -32,8 +33,8 @@ const MainSite = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const sectionRefs = [homeRef, servicesRef, clientsRef, whyChooseRef, aboutRef, faqRef, contactRef];
-  const navItems = (content.navbar.navItems ?? []).map((name, i) => ({ name, ref: sectionRefs[i] }));
+  const sectionRefs = [homeRef, servicesRef, clientsRef, aboutRef, faqRef, contactRef];
+  const navItems = (content.navbar.navItems ?? []).map((name, i) => ({ name, ref: [servicesRef, clientsRef, aboutRef, faqRef][i] }));
 
   return (
     <ActiveSectionProvider>
@@ -41,13 +42,13 @@ const MainSite = () => {
         <main className="w-full overflow-x-hidden">
           <section ref={homeRef} id="home">
             <div className="absolute top-0 left-0 right-0 z-50">
-              <Navbar navItems={navItems} scrollToSection={scrollToSection} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+              <Navbar navItems={navItems} scrollToSection={scrollToSection} menuOpen={menuOpen} setMenuOpen={setMenuOpen} contactRef={contactRef} />
             </div>
             <Home scrollToSection={scrollToSection} contactRef={contactRef} />
           </section>
-          <section ref={servicesRef} id="services"><Services /></section>
-          <section ref={clientsRef} id="clients"><Clients /></section>
-          <section ref={whyChooseRef} id="why-choose"><WhyChoose /></section>
+          <section ref={servicesRef} id="solutions"><Services /></section>
+          <section ref={whyChooseRef} id="solutions-pillars"><WhyChoose /></section>
+          <section ref={clientsRef} id="how-we-partner"><Clients /></section>
           <section ref={aboutRef} id="about"><About /></section>
           <section ref={faqRef} id="faq"><Faq /></section>
           <section ref={contactRef} id="contact"><Contact /></section>
@@ -55,6 +56,7 @@ const MainSite = () => {
         <DotNavigation />
         <ChatWidget />
         <Footer />
+        <CookieBanner />
       </div>
     </ActiveSectionProvider>
   );

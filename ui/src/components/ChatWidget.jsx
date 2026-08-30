@@ -1,65 +1,63 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from './Logo';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://connektixx.onrender.com';
+const OPTIONS = [
+  {
+    label: "Explore solutions",
+    response: "We work across four areas: Market Intelligence & Business Insights, Customer Experience & Engagement, Digital Growth & Demand Generation, and AI Automation & Business Transformation. Head to the Solutions section to see each in detail.",
+    scrollToContact: false,
+  },
+  {
+    label: "Discuss a business challenge",
+    response: "Tell us a bit about what you're trying to solve and we'll point you to the right starting engagement. Use the contact form and select the closest area of interest.",
+    scrollToContact: true,
+  },
+  {
+    label: "Learn how Connektixx works",
+    response: "We start with a small, focused pilot on one offering, prove the model, then scale into a full retained partnership. See How We Partner for the details.",
+    scrollToContact: false,
+  },
+  {
+    label: "Contact the team",
+    response: "You can reach the team at support@connektixx.com, or use the contact form — I'll take you there now.",
+    scrollToContact: true,
+  },
+];
 
-const TypingDots = () => (
-  <div className="flex items-center gap-1 px-4 py-3">
-    {[0, 1, 2].map(i => (
-      <span key={i} className="w-2 h-2 rounded-full"
-        style={{ background: '#FF8A5B', animation: `bounce 1.2s ${i * 0.2}s infinite` }} />
-    ))}
-  </div>
-);
+const scrollToContact = (closePanel) => {
+  closePanel();
+  setTimeout(() => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  }, 200);
+};
 
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { role: 'assistant', content: "Hi! I'm Connie, your Connektixx assistant. How can I help you today? 👋" }
-  ]);
-  const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-  const bottomRef = useRef(null);
-  const inputRef = useRef(null);
+  const [answered, setAnswered] = useState(false);
+  const [response, setResponse] = useState('');
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, loading]);
-
-  useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 300);
-  }, [open]);
-
-  const send = async () => {
-    const text = input.trim();
-    if (!text || loading) return;
-    const userMsg = { role: 'user', content: text };
-    const history = [...messages, userMsg];
-    setMessages(history);
-    setInput('');
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_URL}/api/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history.map(m => ({ role: m.role, content: m.content })) }),
-      });
-      const data = await res.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply || data.message }]);
-    } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, something went wrong. Please try again!' }]);
-    } finally {
-      setLoading(false);
+  const handleOption = (opt) => {
+    setResponse(opt.response);
+    setAnswered(true);
+    if (opt.scrollToContact) {
+      scrollToContact(() => setOpen(false));
     }
   };
 
-  const onKey = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } };
+  const handleReset = () => {
+    setAnswered(false);
+    setResponse('');
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    handleReset();
+  };
 
   const widget = (
     <div style={{ position: 'fixed', bottom: 0, right: 0, zIndex: 9999, pointerEvents: 'none' }}>
-      <style>{`@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}`}</style>
 
       {/* Chat panel */}
       <AnimatePresence>
@@ -70,8 +68,12 @@ const ChatWidget = () => {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
             style={{
-              position: 'absolute', bottom: '5.5rem', right: '1.5rem',
-              width: 360, borderRadius: 16, overflow: 'hidden',
+              position: 'absolute',
+              bottom: '5.5rem',
+              right: '1.5rem',
+              width: 360,
+              borderRadius: 16,
+              overflow: 'hidden',
               boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
               background: 'linear-gradient(160deg, #23262E, #1A1D23)',
               border: '1px solid rgba(255,84,28,0.3)',
@@ -82,67 +84,119 @@ const ChatWidget = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'linear-gradient(135deg, rgba(255,84,28,0.3), rgba(217,67,15,0.2))', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
               <Logo size={32} />
               <div>
-                <p style={{ color: '#fff', fontWeight: 700, fontSize: 14, lineHeight: 1 }}>Connie</p>
-                <p style={{ color: '#FF8A5B', fontSize: 11, marginTop: 2 }}>Connektixx AI Assistant</p>
+                <p style={{ color: '#fff', fontWeight: 700, fontSize: 14, lineHeight: 1 }}>Connektixx</p>
+                <p style={{ color: '#FF8A5B', fontSize: 11, marginTop: 2 }}>Automated assistant</p>
               </div>
-              <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span className="animate-pulse" style={{ width: 8, height: 8, borderRadius: '50%', background: '#34d399', display: 'inline-block' }} />
-                <span style={{ color: '#34d399', fontSize: 11, fontWeight: 600 }}>Online</span>
-              </span>
+              <button
+                onClick={handleClose}
+                aria-label="Close chat"
+                style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.4)', padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" viewBox="0 0 24 24">
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
 
-            {/* Messages */}
-            <div style={{ height: 280, overflowY: 'auto', padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 12, scrollbarWidth: 'none' }}>
-              {messages.map((m, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}
-                  style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
-                  {m.role === 'assistant' && (
-                    <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, marginRight: 8, marginTop: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #FF541C, #D9430F)', fontSize: 11, fontWeight: 700, color: '#fff' }}>C</div>
-                  )}
-                  <div style={{
-                    maxWidth: '75%', padding: '10px 14px', borderRadius: m.role === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
-                    fontSize: 13, lineHeight: 1.5,
-                    background: m.role === 'user' ? 'linear-gradient(135deg, #FF541C, #D9430F)' : 'rgba(255,255,255,0.07)',
-                    backdropFilter: m.role === 'assistant' ? 'blur(16px)' : 'none',
-                    border: m.role === 'assistant' ? '1px solid rgba(255,255,255,0.12)' : 'none',
-                    color: m.role === 'user' ? '#fff' : 'rgba(255,255,255,0.85)',
-                  }}>
-                    {m.content}
-                  </div>
-                </motion.div>
-              ))}
-              {loading && (
-                <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                  <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, marginRight: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #FF541C, #D9430F)', fontSize: 11, fontWeight: 700, color: '#fff' }}>C</div>
-                  <div style={{ background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '16px 16px 16px 4px' }}>
-                    <TypingDots />
-                  </div>
+            {/* Body */}
+            <div style={{ padding: '16px 16px 8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+
+              {/* Opening assistant message */}
+              <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, marginTop: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #FF541C, #D9430F)', fontSize: 11, fontWeight: 700, color: '#fff' }}>C</div>
+                <div style={{ background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '16px 16px 16px 4px', padding: '10px 14px', fontSize: 13, lineHeight: 1.5, color: 'rgba(255,255,255,0.85)', maxWidth: '88%' }}>
+                  Hi, I'm the Connektixx assistant. I can help you find the right place to start — what would you like to do?
                 </div>
-              )}
-              <div ref={bottomRef} />
+              </div>
+
+              {/* Automation disclosure */}
+              <p style={{ fontSize: 11, fontStyle: 'italic', color: 'rgba(255,255,255,0.4)', paddingLeft: 32, marginTop: -4 }}>
+                You're chatting with an automated assistant, not a person.
+              </p>
+
+              {/* Option buttons */}
+              <AnimatePresence mode="wait">
+                {!answered ? (
+                  <motion.div
+                    key="options"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.2 }}
+                    style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingLeft: 32 }}
+                  >
+                    {OPTIONS.map((opt, i) => (
+                      <motion.button
+                        key={i}
+                        onClick={() => handleOption(opt)}
+                        whileHover={{ backgroundColor: 'rgba(255,84,28,0.1)' }}
+                        whileTap={{ scale: 0.97 }}
+                        style={{
+                          background: 'rgba(255,255,255,0.04)',
+                          border: '1px solid rgba(255,84,28,0.3)',
+                          color: '#fff',
+                          fontSize: 13,
+                          borderRadius: 12,
+                          padding: '10px 14px',
+                          width: '100%',
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          transition: 'background 0.15s',
+                          fontFamily: 'inherit',
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {opt.label}
+                      </motion.button>
+                    ))}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="response"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.2 }}
+                    style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingLeft: 32 }}
+                  >
+                    <div style={{ background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '16px 16px 16px 4px', padding: '10px 14px', fontSize: 13, lineHeight: 1.5, color: 'rgba(255,255,255,0.85)' }}>
+                      {response}
+                    </div>
+                    <motion.button
+                      onClick={handleReset}
+                      whileHover={{ borderColor: 'rgba(255,84,28,0.5)', color: '#fff' }}
+                      whileTap={{ scale: 0.97 }}
+                      style={{
+                        alignSelf: 'flex-start',
+                        background: 'transparent',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                        color: 'rgba(255,255,255,0.5)',
+                        fontSize: 12,
+                        borderRadius: 8,
+                        padding: '6px 12px',
+                        cursor: 'pointer',
+                        transition: 'border-color 0.15s, color 0.15s',
+                        fontFamily: 'inherit',
+                      }}
+                    >
+                      Start over
+                    </motion.button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
             </div>
 
-            {/* Input */}
-            <div style={{ padding: '8px 12px 12px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '8px 12px' }}>
-                <textarea
-                  ref={inputRef}
-                  value={input}
-                  onChange={e => setInput(e.target.value)}
-                  onKeyDown={onKey}
-                  rows={1}
-                  placeholder="Ask me anything..."
-                  style={{ flex: 1, background: 'transparent', color: '#fff', fontSize: 13, outline: 'none', resize: 'none', lineHeight: 1.5, maxHeight: 80, border: 'none', fontFamily: 'inherit' }}
-                />
-                <button
-                  onClick={send}
-                  disabled={!input.trim() || loading}
-                  style={{ flexShrink: 0, width: 32, height: 32, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #FF541C, #D9430F)', border: 'none', cursor: 'pointer', opacity: (!input.trim() || loading) ? 0.3 : 1, transition: 'opacity 0.2s' }}
-                >
-                  <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" /></svg>
-                </button>
-              </div>
-              <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 10, textAlign: 'center', marginTop: 6 }}>Powered by Connektixx AI</p>
+            {/* Footer link */}
+            <div style={{ padding: '8px 16px 14px', borderTop: '1px solid rgba(255,255,255,0.07)', marginTop: 6 }}>
+              <button
+                onClick={() => scrollToContact(() => setOpen(false))}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.35)', fontSize: 11, fontFamily: 'inherit', padding: 0, textDecoration: 'underline', textUnderlineOffset: 2 }}
+                onMouseEnter={e => e.currentTarget.style.color = '#FF8A5B'}
+                onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}
+              >
+                Prefer a person? Go to the contact form.
+              </button>
             </div>
           </motion.div>
         )}
@@ -151,13 +205,25 @@ const ChatWidget = () => {
       {/* Toggle button */}
       <div style={{ position: 'absolute', bottom: '1.5rem', right: '1.5rem', pointerEvents: 'auto' }}>
         <motion.button
-          onClick={() => setOpen(o => !o)}
+          onClick={() => {
+            if (open) {
+              handleClose();
+            } else {
+              setOpen(true);
+            }
+          }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.93 }}
           aria-label="Open chat"
           style={{
-            width: 56, height: 56, borderRadius: '50%', border: 'none', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            width: 56,
+            height: 56,
+            borderRadius: '50%',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             background: 'linear-gradient(135deg, #FF541C, #D9430F)',
             boxShadow: '0 0 28px rgba(255,84,28,0.55)',
           }}

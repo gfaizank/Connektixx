@@ -49,7 +49,7 @@ const Faq = () => {
   const [openId, setOpenId] = useState(null);
 
   return (
-    <div className="relative py-20 md:py-28 overflow-hidden" style={{ background: 'linear-gradient(180deg, #faf8ff 0%, #f0edff 100%)' }}>
+    <div className="relative py-20 md:py-28 overflow-hidden" style={{ background: 'linear-gradient(180deg, #F2EFEA, #F0ECE4)' }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full opacity-08"
           style={{ background: 'radial-gradient(ellipse, #FF541C, transparent 70%)', filter: 'blur(80px)' }} />
@@ -57,14 +57,14 @@ const Faq = () => {
 
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-center mb-14">
-          <div className="flex justify-center items-center gap-3 mb-4">
-            <h2 className="text-4xl md:text-5xl font-black" style={{ background: 'linear-gradient(135deg, #FF541C, #D9430F)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              {fq.heading}
-            </h2>
-            <span className="text-4xl">{fq.headingEmoji}</span>
-          </div>
+          <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-bold"
+            style={{ background: 'rgba(255,84,28,0.1)', border: '1px solid rgba(255,84,28,0.25)', color: '#D9430F' }}>
+            {fq.pill}
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+            {fq.heading}
+          </h2>
           <div className="w-20 h-1 mx-auto rounded-full mb-5" style={{ background: 'linear-gradient(90deg, #FF541C, #FF8A5B)' }} />
-          <p className="text-gray-500 max-w-xl mx-auto">{fq.subheading}</p>
         </motion.div>
 
         <div className="max-w-3xl mx-auto">
