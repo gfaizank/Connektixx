@@ -154,6 +154,7 @@ export const defaultContent = {
       { label: "About", href: "#about" },
       { label: "FAQ", href: "#faq" },
       { label: "Contact", href: "#contact" },
+      { label: "Case Study", href: "/case-study" },
     ],
     legalLinks: [
       { label: "Privacy Policy", href: "#" },

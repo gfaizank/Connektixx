@@ -14,6 +14,7 @@ import Contact from "./components/Contact";
 import DotNavigation from "./components/DotNavigation";
 import ChatWidget from "./components/ChatWidget";
 import CookieBanner from "./components/CookieBanner";
+import CaseStudy from "./components/CaseStudy";
 import AdminApp from "./admin/AdminApp";
 
 const MainSite = () => {
@@ -68,6 +69,7 @@ function App() {
       <ContentProvider>
         <Routes>
           <Route path="/" element={<MainSite />} />
+          <Route path="/case-study" element={<CaseStudy />} />
           <Route path="/admin" element={<AdminApp />} />
           <Route path="/admin/*" element={<AdminApp />} />
         </Routes>
