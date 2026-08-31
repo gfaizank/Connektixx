@@ -15,6 +15,7 @@ import DotNavigation from "./components/DotNavigation";
 import ChatWidget from "./components/ChatWidget";
 import CookieBanner from "./components/CookieBanner";
 import CaseStudy from "./components/CaseStudy";
+
 import AdminApp from "./admin/AdminApp";
 
 const MainSite = () => {
@@ -52,6 +53,7 @@ const MainSite = () => {
           <section ref={clientsRef} id="how-we-partner"><Clients /></section>
           <section ref={aboutRef} id="about"><About /></section>
           <section ref={faqRef} id="faq"><Faq /></section>
+          <section id="case-study"><CaseStudy /></section>
           <section ref={contactRef} id="contact"><Contact /></section>
         </main>
         <DotNavigation />
@@ -69,7 +71,6 @@ function App() {
       <ContentProvider>
         <Routes>
           <Route path="/" element={<MainSite />} />
-          <Route path="/case-study" element={<CaseStudy />} />
           <Route path="/admin" element={<AdminApp />} />
           <Route path="/admin/*" element={<AdminApp />} />
         </Routes>
