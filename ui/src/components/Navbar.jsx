@@ -25,12 +25,12 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen, contactRef }
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
           background: scrolled
-            ? 'rgba(35, 38, 46, 0.9)'
-            : 'rgba(35, 38, 46, 0.25)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: scrolled ? '1px solid rgba(255, 84, 28, 0.25)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.3)' : 'none',
+            ? 'rgba(255,255,255,0.94)'
+            : 'transparent',
+          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(10px)' : 'none',
+          borderBottom: scrolled ? '1px solid #E3E7EA' : '1px solid transparent',
+          boxShadow: scrolled ? '0 6px 24px -18px rgba(45,49,58,0.3)' : 'none',
         }}
       >
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -51,10 +51,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen, contactRef }
               className="text-xl font-black tracking-widest uppercase"
               style={{
                 fontFamily: "'Chakra Petch', 'Orbitron', sans-serif",
-                background: 'linear-gradient(135deg, #FF8A5B, #FF541C, #FFB347)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                color: '#2D313A',
               }}
             >
               {nb.brandName}
@@ -68,7 +65,8 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen, contactRef }
                 key={i}
                 onClick={() => scrollToSection(item.ref)}
                 whileHover={{ color: '#FF8A5B' }}
-                className="text-white/70 hover:text-orange-400 font-medium text-sm transition-colors"
+                className="font-medium text-sm transition-colors"
+                style={{ color: '#2D313A' }}
               >
                 {item.name}
               </motion.button>
@@ -85,7 +83,7 @@ const Navbar = ({ navItems, scrollToSection, menuOpen, setMenuOpen, contactRef }
           </div>
 
           {/* Mobile burger */}
-          <button className="md:hidden text-white/80 p-1" onClick={() => setMenuOpen(!menuOpen)}>
+          <button className="md:hidden p-1" style={{ color: '#2D313A' }} onClick={() => setMenuOpen(!menuOpen)}>
             <motion.div animate={{ rotate: menuOpen ? 45 : 0 }} transition={{ duration: 0.2 }}>
               {menuOpen ? (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
